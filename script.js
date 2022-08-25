@@ -12,6 +12,7 @@ const highestScore = document.querySelector("#highest-score");
 // === random number ===
 const roundNum = Math.trunc(Math.random() * 20) + 1;
 
+let scores = 0;
 // hideQuestion.textContent = roundNum;
 console.log(roundNum);
 guessBtn.addEventListener("click", () => {
