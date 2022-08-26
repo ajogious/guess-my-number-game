@@ -7,21 +7,34 @@ const inputNum = document.querySelector(".input-number");
 const guessBtn = document.querySelector(".btn");
 const gameLife = document.querySelector("#game-life");
 const score = document.querySelector("#score");
-const highestScore = document.querySelector("#highest-score");
-
+// const highestScore = document.querySelector("#highest-score");
+const resetBtn = document.querySelector(".reset-btn");
 // === random number ===
-const roundNum = Math.trunc(Math.random() * 20) + 1;
+let roundNum = Math.trunc(Math.random() * 20) + 1;
 
 let scores = 0;
-// hideQuestion.textContent = roundNum;
 console.log(roundNum);
 guessBtn.addEventListener("click", () => {
-  let guess = roundNum;
+  hideQuestion.textContent = roundNum;
   if (inputNum.value === "") {
     message.textContent = `input a number`;
+    hideQuestion.textContent = "?";
     message.classList.add("warning");
-  } else if (inputNum.value === guess) {
+  } else if (hideQuestion.textContent === inputNum.value) {
     message.textContent = `correct`;
     message.classList.add("success");
+    hideQuestion.textContent = roundNum;
+    score.textContent = 4;
+    guessBtn.disabled = true;
+    inputNum.disabled = true;
+  } else if (hideQuestion.textContent !== inputNum.value) {
+    hideQuestion.textContent = "?";
+    message.textContent = `not the correct guess, try again`;
+    gameLife.textContent--;
+    if (gameLife.textContent < 1) {
+      message.textContent = `game over. the correct answer was ${roundNum}`;
+      guessBtn.disabled = true;
+      inputNum.disabled = true;
+    }
   }
 });

@@ -83,7 +83,8 @@ input[type="number"] {
   color: #eee;
 }
 
-.btn {
+.btn,
+.reset-btn {
   margin-top: 10px;
   padding: 5px 15px;
   font-size: 20px;
