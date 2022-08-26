@@ -24,17 +24,29 @@ guessBtn.addEventListener("click", () => {
     message.textContent = `correct`;
     message.classList.add("success");
     hideQuestion.textContent = roundNum;
-    score.textContent = 4;
+
     guessBtn.disabled = true;
     inputNum.disabled = true;
+    localStorage.setItem("score", gameLife.textContent);
+
+    // let store = JSON.parse(localStorage.getItem("score"));
+    score.textContent = localStorage.getItem("score");
+    // console.log(store);
   } else if (hideQuestion.textContent !== inputNum.value) {
     hideQuestion.textContent = "?";
     message.textContent = `not the correct guess, try again`;
+    message.classList.add("danger");
     gameLife.textContent--;
     if (gameLife.textContent < 1) {
       message.textContent = `game over. the correct answer was ${roundNum}`;
       guessBtn.disabled = true;
       inputNum.disabled = true;
+      document.querySelector(".container").style.backgroundColor = "red";
     }
   }
 });
+
+resetBtn.addEventListener("click", () => {
+  window.location.reload();
+});
+score.textContent = localStorage.getItem("score");
