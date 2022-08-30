@@ -43,7 +43,7 @@ guessBtn.addEventListener('click', function() {
   // === player wins ===
   if (inputNum.value === hideQuestion.textContent) {
     score.textContent = gameLife.textContent;
-    
+
     // === if gamelife is greater than highest score is 
     if (gameLife.textContent >= highestScore.textContent) {
       highestScore.textContent = gameLife.textContent
@@ -85,7 +85,8 @@ resetBtn.addEventListener("click", () => {
   message.style.color = ''
   message.textContent = '';
   inputNum.value = '';
-  gameLife.textContent = 10
+  gameLife.textContent = 10;
+  document.querySelector('.game-over').textContent = '';
   document.querySelector('.container').style.backgroundColor = '#fff'
   enableFunc()
 });
