@@ -11,7 +11,6 @@ const resetBtn = document.querySelector(".reset-btn");
 const highestScore = document.querySelector('#highest-score');
 
 gameLife.textContent = 10;
-// let highestScore;
 
 // == time out for message ===
 const timeOut = () => {
@@ -27,10 +26,15 @@ const disabledFunc = () => {
   inputNum.disabled = true;
 }
 
+// === button enable func ===
+const enableFunc = () => {
+  guessBtn.disabled = false;
+  inputNum.disabled = false;
+}
+
 // === random number ===
 let roundNum = Math.trunc(Math.random() * 20) + 1;
 console.log(roundNum);
-
 // === btn on click ===
 guessBtn.addEventListener('click', function() {
   hideQuestion.textContent = roundNum;
@@ -38,18 +42,16 @@ guessBtn.addEventListener('click', function() {
 
   // === player wins ===
   if (inputNum.value === hideQuestion.textContent) {
-    hideQuestion.textContent = roundNum;
-    message.style.color = '#09e209'
-    message.textContent = `Correct Guess`;
-    document.querySelector('.container').style.backgroundColor = '#333'
-    disabledFunc();
-    localStorage.setItem("score", gameLife.textContent);
-    localStorage.getItem('score');
-    highestScore.textContent = localStorage.getItem('score');
-    score.textContent = localStorage.getItem("score");
-    if (score.textContent > gameLife.textContent) {
-      highestScore.textContent = score.textContent
+    score.textContent = gameLife.textContent;
+    
+    // === if gamelife is greater than highest score is 
+    if (gameLife.textContent >= highestScore.textContent) {
+      highestScore.textContent = gameLife.textContent
     }
+    message.textContent = `Correct Guess`;
+    message.style.color = 'green';
+    document.querySelector('.container').style.backgroundColor = '#333';
+    disabledFunc()
   } 
   // === if player input nothing ===
   else if (inputNum.value === '') {
@@ -75,10 +77,15 @@ guessBtn.addEventListener('click', function() {
   } 
 })
 
-//== local storage ===
-score.textContent = localStorage.getItem("score");
-
 // === reset button ===
 resetBtn.addEventListener("click", () => {
-  window.location.reload();
+  roundNum = Math.trunc(Math.random() * 20) + 1;
+  console.log(roundNum);
+  hideQuestion.textContent = '?';
+  message.style.color = ''
+  message.textContent = '';
+  inputNum.value = '';
+  gameLife.textContent = 10
+  document.querySelector('.container').style.backgroundColor = '#fff'
+  enableFunc()
 });
