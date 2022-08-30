@@ -47,6 +47,8 @@ guessBtn.addEventListener('click', function() {
     // === if gamelife is greater than highest score is 
     if (gameLife.textContent >= highestScore.textContent) {
       highestScore.textContent = gameLife.textContent
+    } else {
+      highestScore.textContent = 10
     }
     message.textContent = `Correct Guess`;
     message.style.color = 'green';
