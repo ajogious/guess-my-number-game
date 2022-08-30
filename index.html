@@ -8,23 +8,28 @@
     <title>guess my number</title>
   </head>
   <body>
+
+
     <main class="main">
       <div class="container">
         <h1>Guess My Number Game</h1>
-        <h5>guess between 1 and 20</h5>
-        <div class="hide-question">?</div>
+        <h1 class="game-over"></h1>
+        <h5>Guess between 1 and 20</h5>
+        <div class="question-div">
+          <div class="hide-question">?</div>
+        </div>
         <div class="input-area">
           <div>
             <span class="message"></span><br />
             <input type="number" min="1" max="20" class="input-number" />
             <br />
             <button class="btn">Guess</button>
+            <button type="reset" class="reset-btn">Reset</button>
           </div>
           <div class="score-area">
-            <h5>Game Life: <span id="game-life">10</span></h5>
-            <h5>Score: <span id="score">10</span></h5>
-            <!-- <h5>Highest Score: <span id="highest-score">10</span></h5> -->
-            <button type="reset" class="reset-btn">Reset</button>
+            <h5>Game Life: <span id="game-life"></span></h5>
+            <h5>Score: <span id="score">--</span></h5>
+            <h5>Highest Score: <span id="highest-score">--</span></h5>
           </div>
         </div>
       </div>

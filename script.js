@@ -7,46 +7,78 @@ const inputNum = document.querySelector(".input-number");
 const guessBtn = document.querySelector(".btn");
 const gameLife = document.querySelector("#game-life");
 const score = document.querySelector("#score");
-// const highestScore = document.querySelector("#highest-score");
 const resetBtn = document.querySelector(".reset-btn");
+const highestScore = document.querySelector('#highest-score');
+
+gameLife.textContent = 10;
+// let highestScore;
+
+// == time out for message ===
+const timeOut = () => {
+  message.style.display = ''
+  setTimeout(() => {
+    message.style.display = 'none'
+  }, 1500)
+}
+
+// === button disabled func ===
+const disabledFunc = () => {
+  guessBtn.disabled = true;
+  inputNum.disabled = true;
+}
+
 // === random number ===
 let roundNum = Math.trunc(Math.random() * 20) + 1;
-
-let scores = 0;
 console.log(roundNum);
-guessBtn.addEventListener("click", () => {
+
+// === btn on click ===
+guessBtn.addEventListener('click', function() {
   hideQuestion.textContent = roundNum;
-  if (inputNum.value === "") {
-    message.textContent = `input a number`;
-    hideQuestion.textContent = "?";
-    message.classList.add("warning");
-  } else if (hideQuestion.textContent === inputNum.value) {
-    message.textContent = `correct`;
-    message.classList.add("success");
+  message.style.display = ''
+
+  // === player wins ===
+  if (inputNum.value === hideQuestion.textContent) {
     hideQuestion.textContent = roundNum;
-
-    guessBtn.disabled = true;
-    inputNum.disabled = true;
+    message.style.color = '#09e209'
+    message.textContent = `Correct Guess`;
+    document.querySelector('.container').style.backgroundColor = '#333'
+    disabledFunc();
     localStorage.setItem("score", gameLife.textContent);
-
-    // let store = JSON.parse(localStorage.getItem("score"));
+    localStorage.getItem('score');
+    highestScore.textContent = localStorage.getItem('score');
     score.textContent = localStorage.getItem("score");
-    // console.log(store);
-  } else if (hideQuestion.textContent !== inputNum.value) {
-    hideQuestion.textContent = "?";
-    message.textContent = `not the correct guess, try again`;
-    message.classList.add("danger");
-    gameLife.textContent--;
-    if (gameLife.textContent < 1) {
-      message.textContent = `game over. the correct answer was ${roundNum}`;
-      guessBtn.disabled = true;
-      inputNum.disabled = true;
-      document.querySelector(".container").style.backgroundColor = "red";
+    if (score.textContent > gameLife.textContent) {
+      highestScore.textContent = score.textContent
     }
-  }
-});
+  } 
+  // === if player input nothing ===
+  else if (inputNum.value === '') {
+    message.textContent = `Input a number from 1 to 20`;
+    hideQuestion.textContent = '?';
+    timeOut()
+  } 
+  
+  // === if incorrect number inputed ===
+  else if (inputNum.value !== hideQuestion.textContent) {
+    message.textContent = `Incorrect Guess, try again`;
+    message.style.color = '#e70f0f'
+    hideQuestion.textContent = '?'
+    gameLife.textContent--;
+    timeOut()
 
+    // === game over if score less than 1 ===
+    if (gameLife.textContent < 1) {
+      document.querySelector('.container').style.backgroundColor = '#f00'
+      document.querySelector('.game-over').textContent = `Game Over. The correct number was ${roundNum}`;
+      disabledFunc()
+    }
+  } 
+})
+
+//== local storage ===
+score.textContent = localStorage.getItem("score");
+
+// === reset button ===
 resetBtn.addEventListener("click", () => {
   window.location.reload();
 });
-score.textContent = localStorage.getItem("score");
