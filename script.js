@@ -28,12 +28,6 @@ const disabledFunc = () => {
   inputNum.disabled = true;
 };
 
-// === button enable func ===
-const enableFunc = () => {
-  guessBtn.disabled = false;
-  inputNum.disabled = false;
-};
-
 // === random number ===
 let roundNum = Math.trunc(Math.random() * 20) + 1;
 console.log(roundNum);
@@ -92,5 +86,6 @@ resetBtn.addEventListener("click", () => {
   gameLife.textContent = scored;
   document.querySelector(".game-over").textContent = "";
   document.querySelector(".container").style.backgroundColor = "#fff";
-  enableFunc();
+  guessBtn.disabled = false;
+  inputNum.disabled = false;
 });
