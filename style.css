@@ -17,7 +17,8 @@ html {
 
 .container {
   border: 1px solid #333;
-  padding: 10rem 1rem;
+  padding: 10rem 5rem;
+  max-width: 450px;
 }
 
 form {
@@ -34,10 +35,8 @@ form {
 }
 
 .input-value {
-  min-width: 400px;
+  width: 100%;
   font-size: 3rem;
-  appearance: none;
-  margin: 0;
 }
 
 .btn {
